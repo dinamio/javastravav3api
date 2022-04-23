@@ -27,6 +27,8 @@ public class MapPointSerializer implements JsonDeserializer<StravaMapPoint>, Jso
 	public StravaMapPoint deserialize(final JsonElement element, final Type type, final JsonDeserializationContext context)
 			throws JsonParseException {
 		JsonArray array = element.getAsJsonArray();
+		if (array.size() == 0)
+			return new StravaMapPoint();
 		return new StravaMapPoint(Float.valueOf(array.get(0).getAsFloat()), Float.valueOf(array.get(1).getAsFloat()));
 	}
 

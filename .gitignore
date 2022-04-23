@@ -1,0 +1,20 @@
+
+Strava API v3/javastrava-api.iml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_24.xml
+.idea/libraries/Maven__org_apache_logging_log4j_log4j_slf4j_impl_2_8_1.xml
+.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_8_1.xml
+.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_8_1.xml
+.idea/libraries/Maven__org_apache_commons_commons_jcs_core_2_1.xml
+.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml
+.idea/libraries/Maven__com_squareup_retrofit_retrofit_1_9_0.xml
+.idea/libraries/Maven__com_squareup_okio_okio_1_3_0.xml
+.idea/libraries/Maven__com_squareup_okhttp_okhttp_2_3_0.xml
+.idea/libraries/Maven__com_google_code_gson_gson_2_8_0.xml
+.idea/javastravav3api.iml
+.idea/jarRepositories.xml
+.idea/encodings.xml
+.idea/compiler.xml
+.idea/.name
