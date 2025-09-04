@@ -2,6 +2,8 @@ package javastrava.api;
 
 import javastrava.api.async.StravaAPICallback;
 import javastrava.model.StravaStream;
+import javastrava.model.reference.StravaStreamResolutionType;
+import javastrava.model.reference.StravaStreamSeriesDownsamplingType;
 import javastrava.model.reference.StravaStreamType;
 import javastrava.service.StreamService;
 import javastrava.service.exception.BadRequestException;
