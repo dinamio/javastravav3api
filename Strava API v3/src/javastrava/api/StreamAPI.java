@@ -58,7 +58,7 @@ public interface StreamAPI {
 	 * @throws BadRequestException
 	 *             If the request is malformed
 	 */
-	@GET("/activities/{id}/streams/")
+	@GET("/activities/{id}/streams")
 	default StravaStream[] getActivityStreams(@Path("id") final Long activityId, final StravaStreamType[] types, @Query("key_by_type") final Boolean keyByType) throws UnauthorizedException, NotFoundException, BadRequestException {
 		return getActivityStreams(activityId, typeString(types), keyByType);
 	}
@@ -80,7 +80,7 @@ public interface StreamAPI {
 	 * @throws BadRequestException
 	 *             If the request is malformed
 	 */
-	@GET("/activities/{id}/streams/")
+	@GET("/activities/{id}/streams")
 	public StravaStream[] getActivityStreams(@Path("id") final Long activityId, @Query("keys") final String keys, @Query("key_by_type") final Boolean keyByType) throws UnauthorizedException, NotFoundException, BadRequestException;
 
 	/**
@@ -101,7 +101,7 @@ public interface StreamAPI {
 	 * @throws BadRequestException
 	 *             If the request is malformed
 	 */
-	@GET("/activities/{id}/streams/")
+	@GET("/activities/{id}/streams")
 	default void getActivityStreams(@Path("id") final Long activityId, final StravaStreamType[] types, @Query("key_by_type") final Boolean keyByType, final StravaAPICallback<StravaStream[]> callback)
 			throws UnauthorizedException, NotFoundException, BadRequestException {
 		getActivityStreams(activityId, typeString(types), keyByType, callback);
@@ -125,7 +125,7 @@ public interface StreamAPI {
 	 * @throws BadRequestException
 	 *             If the request is malformed
 	 */
-	@GET("/activities/{id}/streams/")
+	@GET("/activities/{id}/streams")
 	public void getActivityStreams(@Path("id") final Long activityId, @Query("keys") final String keys, @Query("key_by_type") final Boolean keyByType, final StravaAPICallback<StravaStream[]> callback)
 			throws UnauthorizedException, NotFoundException, BadRequestException;
 
@@ -146,7 +146,7 @@ public interface StreamAPI {
 	 * @throws BadRequestException
 	 *             If the request is malformed
 	 */
-	@GET("/activities/{id}/streams/")
+	@GET("/activities/{id}/streams")
 	default Response getActivityStreamsRaw(@Path("id") final Long activityId, final StravaStreamType[] types, @Query("key_by_type") final Boolean keyByType) throws UnauthorizedException, NotFoundException, BadRequestException {
 		return getActivityStreamsRaw(activityId, typeString(types), keyByType);
 	}
@@ -168,7 +168,7 @@ public interface StreamAPI {
 	 * @throws BadRequestException
 	 *             If the request is malformed
 	 */
-	@GET("/activities/{id}/streams/")
+	@GET("/activities/{id}/streams")
 	public Response getActivityStreamsRaw(@Path("id") final Long activityId, @Query("keys") final String keys, @Query("key_by_type") final Boolean keyByType) throws UnauthorizedException, NotFoundException, BadRequestException;
 
 	/**
