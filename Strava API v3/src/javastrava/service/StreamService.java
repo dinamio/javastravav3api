@@ -96,17 +96,11 @@ public interface StreamService extends StravaService {
 	 *            The id of the activity for which streams are to be retrieved
 	 * @param types
 	 *            List of types, if the activity does not have that stream it will not be included in the response
-	 * @param resolution
-	 *            (Optional) low (100), medium (1000) or high (10000), default is all, indicates desired number of data points, streams will only be down
-	 *            sampled
-	 * @param seriesType
-	 *            (Optional) relevant only if using resolution. Either "time" or "distance", default is "distance", used to index the streams if the stream is
-	 *            being reduced
 	 * @return Returns an array of unordered stream objects, or <code>null</code> if the activity doesn't exist
 	 * @throws UnauthorizedException
 	 *             If there is a security exception
 	 */
-	public List<StravaStream> getActivityStreams(final Long activityId, final StravaStreamResolutionType resolution, final StravaStreamSeriesDownsamplingType seriesType,
+	public List<StravaStream> getActivityStreams(final Long activityId,
 			final StravaStreamType... types);
 
 	/**

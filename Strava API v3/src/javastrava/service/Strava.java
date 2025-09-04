@@ -477,18 +477,14 @@ public class Strava implements ActivityService, AthleteService, ChallengeService
 	 *            Activity identifier
 	 * @param types
 	 *            List of types, if the activity does not have that stream it will not be included in the response
-	 * @param resolution
-	 *            (Optional) low (100), medium (1000) or high (10000), default is all, indicates desired number of data points, streams will only be down sampled
-	 * @param seriesType
-	 *            (Optional) relevant only if using resolution. Either "time" or "distance", default is "distance", used to index the streams if the stream is being reduced
 	 * @return List of streams for the activity, or <code>null</code> if the activity does not exist.
-	 * @see javastrava.service.StreamService#getActivityStreams(java.lang.Long, javastrava.model.reference.StravaStreamResolutionType, javastrava.model.reference.StravaStreamSeriesDownsamplingType,
+	 * @see javastrava.service.StreamService#getActivityStreams(java.lang.Long,
 	 *      javastrava.model.reference.StravaStreamType[])
 	 */
 	@Override
-	public List<StravaStream> getActivityStreams(final Long activityId, final StravaStreamResolutionType resolution, final StravaStreamSeriesDownsamplingType seriesType,
+	public List<StravaStream> getActivityStreams(final Long activityId,
 			final StravaStreamType... types) {
-		return this.streamService.getActivityStreams(activityId, resolution, seriesType, types);
+		return this.streamService.getActivityStreams(activityId, types);
 	}
 
 	/**

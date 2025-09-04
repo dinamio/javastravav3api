@@ -629,9 +629,10 @@ public class API {
 	 * @see javastrava.api.StreamAPI#getActivityStreams(java.lang.Long, java.lang.String, javastrava.model.reference.StravaStreamResolutionType,
 	 *      javastrava.model.reference.StravaStreamSeriesDownsamplingType)
 	 */
-	public StravaStream[] getActivityStreams(final Long activityId, final String types, final StravaStreamResolutionType resolution, final StravaStreamSeriesDownsamplingType seriesType)
+	public StravaStream[] getActivityStreams(final Long activityId, final String types)
 			throws UnauthorizedException, NotFoundException, BadRequestException {
-		return this.streamAPI.getActivityStreams(activityId, types, resolution, seriesType);
+		// Note: resolution and seriesType parameters are deprecated in the new API
+		return this.streamAPI.getActivityStreams(activityId, types, true);
 	}
 
 	/**
@@ -656,7 +657,8 @@ public class API {
 	public StravaAPIFuture<StravaStream[]> getActivityStreamsAsync(final Long activityId, final String types, final StravaStreamResolutionType resolution,
 			final StravaStreamSeriesDownsamplingType seriesType) throws UnauthorizedException, NotFoundException, BadRequestException {
 		final StravaAPIFuture<StravaStream[]> future = new StravaAPIFuture<StravaStream[]>();
-		this.streamAPI.getActivityStreams(activityId, types, resolution, seriesType, callback(future));
+		// Note: resolution and seriesType parameters are deprecated in the new API
+		this.streamAPI.getActivityStreams(activityId, types, null, callback(future));
 		return future;
 	}
 
