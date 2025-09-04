@@ -38,6 +38,7 @@ import javastrava.model.StravaSegmentExplorerResponse;
 import javastrava.model.StravaSegmentLeaderboard;
 import javastrava.model.StravaStatistics;
 import javastrava.model.StravaStream;
+import javastrava.model.StravaStreamSet;
 import javastrava.model.StravaUploadResponse;
 import javastrava.model.reference.StravaActivityType;
 import javastrava.model.reference.StravaAgeGroup;
@@ -48,6 +49,7 @@ import javastrava.model.reference.StravaResourceState;
 import javastrava.model.reference.StravaSegmentExplorerActivityType;
 import javastrava.model.reference.StravaStreamResolutionType;
 import javastrava.model.reference.StravaStreamSeriesDownsamplingType;
+import javastrava.model.reference.StravaStreamType;
 import javastrava.model.reference.StravaWeightClass;
 import javastrava.model.webhook.StravaEventSubscription;
 import javastrava.model.webhook.reference.StravaSubscriptionAspectType;
@@ -659,6 +661,94 @@ public class API {
 		final StravaAPIFuture<StravaStream[]> future = new StravaAPIFuture<StravaStream[]>();
 		// Note: resolution and seriesType parameters are deprecated in the new API
 		this.streamAPI.getActivityStreams(activityId, types, null, callback(future));
+		return future;
+	}
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true format)
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param types
+	 *            Array of stream types, if the activity does not have that stream it will not be included in the response
+	 * @return Returns a stream set with streams keyed by type, or <code>null</code> if the activity doesn't exist
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 * @see javastrava.api.StreamAPI#getActivityStreamSet(java.lang.Long, javastrava.model.reference.StravaStreamType[])
+	 */
+	public StravaStreamSet getActivityStreamSet(final Long activityId, final StravaStreamType[] types)
+			throws UnauthorizedException, NotFoundException, BadRequestException {
+		return this.streamAPI.getActivityStreamSet(activityId, types);
+	}
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true format)
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param keys
+	 *            Comma separated list of types, if the activity does not have that stream it will not be included in the response
+	 * @return Returns a stream set with streams keyed by type, or <code>null</code> if the activity doesn't exist
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 * @see javastrava.api.StreamAPI#getActivityStreamSet(java.lang.Long, java.lang.String, java.lang.Boolean)
+	 */
+	public StravaStreamSet getActivityStreamSet(final Long activityId, final String keys)
+			throws UnauthorizedException, NotFoundException, BadRequestException {
+		return this.streamAPI.getActivityStreamSet(activityId, keys, true);
+	}
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true format) - Async version
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param types
+	 *            Array of stream types, if the activity does not have that stream it will not be included in the response
+	 * @return future The {@link CompletableFuture} on which to call future.complete() when the API returns
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 * @see javastrava.api.StreamAPI#getActivityStreamSet(java.lang.Long, javastrava.model.reference.StravaStreamType[], javastrava.api.async.StravaAPICallback)
+	 */
+	public StravaAPIFuture<StravaStreamSet> getActivityStreamSetAsync(final Long activityId, final StravaStreamType[] types)
+			throws UnauthorizedException, NotFoundException, BadRequestException {
+		final StravaAPIFuture<StravaStreamSet> future = new StravaAPIFuture<StravaStreamSet>();
+		this.streamAPI.getActivityStreamSet(activityId, types, callback(future));
+		return future;
+	}
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true format) - Async version
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param keys
+	 *            Comma separated list of types, if the activity does not have that stream it will not be included in the response
+	 * @return future The {@link CompletableFuture} on which to call future.complete() when the API returns
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 * @see javastrava.api.StreamAPI#getActivityStreamSet(java.lang.Long, java.lang.String, java.lang.Boolean, javastrava.api.async.StravaAPICallback)
+	 */
+	public StravaAPIFuture<StravaStreamSet> getActivityStreamSetAsync(final Long activityId, final String keys)
+			throws UnauthorizedException, NotFoundException, BadRequestException {
+		final StravaAPIFuture<StravaStreamSet> future = new StravaAPIFuture<StravaStreamSet>();
+		this.streamAPI.getActivityStreamSet(activityId, keys, true, callback(future));
 		return future;
 	}
 

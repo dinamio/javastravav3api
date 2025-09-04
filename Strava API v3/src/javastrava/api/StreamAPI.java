@@ -2,6 +2,7 @@ package javastrava.api;
 
 import javastrava.api.async.StravaAPICallback;
 import javastrava.model.StravaStream;
+import javastrava.model.StravaStreamSet;
 import javastrava.model.reference.StravaStreamResolutionType;
 import javastrava.model.reference.StravaStreamSeriesDownsamplingType;
 import javastrava.model.reference.StravaStreamType;
@@ -170,6 +171,84 @@ public interface StreamAPI {
 	 */
 	@GET("/activities/{id}/streams")
 	public Response getActivityStreamsRaw(@Path("id") final Long activityId, @Query("keys") final String keys, @Query("key_by_type") final Boolean keyByType) throws UnauthorizedException, NotFoundException, BadRequestException;
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true)
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param types
+	 *            Array of stream types, if the activity does not have that stream it will not be included in the response
+	 * @return Returns a stream set with streams keyed by type, or <code>null</code> if the activity doesn't exist
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 */
+	@GET("/activities/{id}/streams/")
+	default StravaStreamSet getActivityStreamSet(@Path("id") final Long activityId, final StravaStreamType[] types) throws UnauthorizedException, NotFoundException, BadRequestException {
+		return getActivityStreamSet(activityId, typeString(types), true);
+	}
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true)
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param keys
+	 *            Comma separated list of types, if the activity does not have that stream it will not be included in the response
+	 * @return Returns a stream set with streams keyed by type, or <code>null</code> if the activity doesn't exist
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 */
+	@GET("/activities/{id}/streams/")
+	public StravaStreamSet getActivityStreamSet(@Path("id") final Long activityId, @Query("keys") final String keys, @Query("key_by_type") final Boolean keyByType) throws UnauthorizedException, NotFoundException, BadRequestException;
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true) - Async version
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param types
+	 *            Array of stream types, if the activity does not have that stream it will not be included in the response
+	 * @param callback
+	 *            The callback to execute on completion
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 */
+	@GET("/activities/{id}/streams/")
+	default void getActivityStreamSet(@Path("id") final Long activityId, final StravaStreamType[] types, final StravaAPICallback<StravaStreamSet> callback) throws UnauthorizedException, NotFoundException, BadRequestException {
+		getActivityStreamSet(activityId, typeString(types), true, callback);
+	}
+
+	/**
+	 * Get activity streams as a keyed object (key_by_type=true) - Async version
+	 *
+	 * @param activityId
+	 *            The id of the activity for which streams are to be retrieved
+	 * @param keys
+	 *            Comma separated list of types, if the activity does not have that stream it will not be included in the response
+	 * @param callback
+	 *            The callback to execute on completion
+	 * @throws UnauthorizedException
+	 *             If there is a security exception
+	 * @throws NotFoundException
+	 *             If the activity does not exist
+	 * @throws BadRequestException
+	 *             If the request is malformed
+	 */
+	@GET("/activities/{id}/streams/")
+	public void getActivityStreamSet(@Path("id") final Long activityId, @Query("keys") final String keys, @Query("key_by_type") final Boolean keyByType, final StravaAPICallback<StravaStreamSet> callback) throws UnauthorizedException, NotFoundException, BadRequestException;
 
 	/**
 	 * @see javastrava.service.StreamService#getEffortStreams(Long, StravaStreamResolutionType, StravaStreamSeriesDownsamplingType, javastrava.model.reference.StravaStreamType...)
